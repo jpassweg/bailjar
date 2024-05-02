@@ -1,25 +1,18 @@
-import logo from './logo.svg';
+import React from "react";
 import './App.css';
+import './Containers.css'
+import { ProfileSection } from "./ProfileSection";
+import { DarkModeToggle } from "./DarkMode";
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <body>
+      <div class="main-container">
+        <DarkModeToggle />
+        <ProfileSection />
+      </div>
+    </body>
   );
-}
+};
 
 export default App;

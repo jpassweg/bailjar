@@ -24,6 +24,33 @@
   color: white;
 }
 
+/* Default light theme styles */
+body {
+  background-color: #fff;  /* White background for light mode */
+  color: #333;             /* Darker text for light mode */
+}
+
+/* Dark theme styles */
+.dark body {
+  background-color: #333;  /* Dark background for dark mode */
+  color: #fff;             /* Light text for dark mode */
+}
+
+/* Additional UI components */
+/* You can customize other elements specifically for dark mode as well */
+.dark button {
+  background-color: #555;  /* Darker background for buttons in dark mode */
+  color: #fff;             /* White text for buttons in dark mode */
+}
+
+.dark a {
+  color: #1e90ff;          /* Lighter link color for better visibility in dark mode */
+}
+
+.dark img, video {
+  filter: grayscale(50%) opacity(90%);
+}
+
 .App-link {
   color: #61dafb;
 }
