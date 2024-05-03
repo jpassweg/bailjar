@@ -6,7 +6,7 @@ export const ProfileSection = () => {
   return (
     <div class="container">
       <div class="image-container">
-        <img src={profile} class="image" alt="Jonas Passweg"/>
+        <img src={profile} id="profile-image" alt="Jonas Passweg"/>
       </div>
       <div class="text-container">
         <h1>Hello, I'm Jonas Passweg</h1>
