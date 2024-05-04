@@ -76,7 +76,11 @@
 
 @media (max-width: 750px) {
   #about-me-div {
-    margin-bottom: -50px;
+    margin-bottom: -200px;
+  }
+
+  #profile-section-div {
+    margin-bottom: -40px;
   }
 }
 
@@ -89,8 +93,30 @@
   max-width: 800px;
 }
 
+#about-me-container {
+  background-color: #abf7b1;
+  border-radius: 0px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+@media (min-width: 750px) {
+  #about-me-container {
+    border-radius: 30px;
+  }
+}
+
+.dark #about-me-container{
+  background-color: inherit;
+}
+
+#profile-section-div {
+  flex-basis: 300px;
+}
+
 #about-me-div {
-  flex-basis: 400px;
+  flex-basis: 600px;
+  padding: 0px 20px;
 }
 
 #profile-image {
@@ -108,4 +134,57 @@
 #brain-div {
   flex-basis: 150px;
   max-height: 150px;
+}
+
+.card {
+  flex: 0 0 auto;
+  min-width: 300px;
+  max-width: 500px;
+  border-radius: 20px;
+  margin: 20px;
+  padding: 0px 20px;
+  border: solid 2px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+}
+
+.dark .card {
+  box-shadow: 0 4px 8px 0 rgba(255,255,255,0.2);
+}
+
+.card:hover {
+  box-shadow: 0 12px 25px 0 rgba(0,0,0,0.4);
+}
+
+.dark .card:hover {
+  box-shadow: 0 12px 25px 0 rgba(255,255,255,0.2);
+}
+
+@media (min-width: 750px) {
+  .scrolling-wrapper-flexbox {  
+    display: flex;  
+    flex-direction: row; /* Default to vertical layout */
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
+    flex-wrap: nowrap;  
+    overflow-x: auto;  
+  }
+}
+
+a:link {
+  text-decoration: none;
+}
+
+a:visited {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+a:active {
+  text-decoration: underline;
 }

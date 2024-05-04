@@ -21,8 +21,13 @@ h2 {
   font-size: 38px;
 }
 
+h3 {
+  font-size: 28px;
+  margin-bottom: 0px;
+}
+
 p {
-  font-size: 20px;
+  font-size: 22px;
 }
 
 .App-header {
