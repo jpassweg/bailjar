@@ -9,10 +9,40 @@ const Header = () => {
   const [deviceHeight, changeDeviceHeight] = useState(window.innerHeight);
   const [counter, setCounter] = useState(0);
 
-  const FPS = 2;
-  const renderPerCounter = FPS * 10;
-  const ledDimmingRate = 1 / FPS;
-  const [renderFps] = useState(1000 / (FPS * renderPerCounter));
+  const [FPS] = useState(1);
+
+  // This is for drawing.length === 8. Maybe we need different values for other
+  const calculateRenderPerCounter = useCallback((FPS) => {
+    if (FPS < 1) {
+      return Math.round(10 / FPS);
+    } else if (FPS >= 1 && FPS <= 30) {
+      // Linear interpolation between 10 and 2 for f between 1 and 30
+      return Math.round(10 - (8 / 29) * (FPS - 1));
+    } else if (FPS > 30 && FPS <= 120) {
+      // Linear interpolation between 2 and 1 for f between 30 and 120
+      return Math.round(2 - (1 / 90) * (FPS - 30));
+    } else {
+      return 1;
+    }
+  }, []);
+
+  const calculateLedDimmingRate = useCallback((FPS) => {
+    if (FPS < 1) {
+      return 1;
+    } else if (FPS >= 1 && FPS <= 30) {
+      // Linear interpolation between 1 and 0.01 for f between 1 and 30
+      return 1 - (0.99 / 29) * (FPS - 1);
+    } else if (FPS > 30 && FPS <= 120) {
+      // Linear interpolation between 0.01 and 0.005 for f between 30 and 120
+      return 0.01 - (0.005 / 90) * (FPS - 30);
+    } else {
+      return 0.005;
+    }
+  }, []);
+
+  const calculateRenderRate = useCallback((FPS) => {
+      return 1000 / Math.round(calculateRenderPerCounter(FPS) * FPS);
+  }, [calculateRenderPerCounter]);
 
   // Update the width and height on resize
   useEffect(() => {
@@ -180,7 +210,7 @@ const Header = () => {
     // Draw resistors on the left
     for (let i = 0; i < drawing[0].length; i++) {
       const y = startY + i * cellSize;
-      drawResistor(startX - cellSize / 2, y, cellSize, drawing[Math.round(counter / renderPerCounter) % drawing.length][i] === 1);
+      drawResistor(startX - cellSize / 2, y, cellSize, drawing[Math.round(counter / calculateRenderPerCounter(FPS)) % drawing.length][i] === 1);
     }
 
     // Draw LEDs
@@ -214,7 +244,7 @@ const Header = () => {
       const y = startY + drawing[0].length * cellSize;
       drawSwitch(x, y, cellSize, counter % drawing.length === col);
     }
-  }, [ctx, drawing, counter, drawLED, drawResistor, drawSwitch, currCurrent, renderPerCounter]);
+  }, [ctx, drawing, counter, drawLED, drawResistor, drawSwitch, currCurrent, FPS, calculateRenderPerCounter]);
 
   // initialize the canvas.current context
   useEffect(() => {
@@ -237,19 +267,19 @@ const Header = () => {
         let updatedCurrent = prevCurrCurrent.map(row => [...row]); // Deep copy the current state
         for (let i = 0; i < updatedCurrent.length; i++) {
           for (let j = 0; j < updatedCurrent[0].length; j++) {
-            if (i === Math.round(counter / renderPerCounter) % drawing.length && drawing[i][j] === 1) { // Replace this condition with the actual logic
+            if (i === Math.round(counter / calculateRenderPerCounter(FPS)) % drawing.length && drawing[i][j] === 1) { // Replace this condition with the actual logic
                 updatedCurrent[i][j] = 1;
             } else { // Replace this condition with the actual logic
-              updatedCurrent[i][j] = Math.max(0, prevCurrCurrent[i][j] - ledDimmingRate);
+              updatedCurrent[i][j] = Math.max(0, prevCurrCurrent[i][j] - calculateLedDimmingRate(FPS));
             }
           }
         }
         return updatedCurrent;
       });
-    }, renderFps);
+    }, calculateRenderRate(FPS));
   
     return () => clearInterval(renderInterval);
-  }, [renderFps, drawCircuit, setCurrCurrent, currCurrent, counter, drawing, ledDimmingRate, renderPerCounter]);
+  }, [drawCircuit, setCurrCurrent, currCurrent, counter, drawing, FPS, calculateRenderRate, calculateLedDimmingRate, calculateRenderPerCounter]);
 
   return (<div className="header-bg"><canvas ref={canvas} id="circuitCanvas"></canvas></div>);
 }
