@@ -1,15 +1,19 @@
 import React, { useRef, useEffect, useState, useCallback, useMemo } from 'react';
-import './App.css';
+import '../App.css';
 import './Header.css'
 
 const Header = () => {
 
-  // Device related consts
-  const [deviceWidth, changeDeviceWidth] = useState(window.innerWidth);
-  const [deviceHeight, changeDeviceHeight] = useState(window.innerHeight);
+  // Device related state
+  const DIMENSIONS = { WIDTH: window.innerWidth, HEIGHT: window.innerHeight };
+  const [deviceWidth, changeDeviceWidth] = useState(DIMENSIONS.WIDTH);
+  const [deviceHeight, changeDeviceHeight] = useState(DIMENSIONS.HEIGHT);
   const [counter, setCounter] = useState(0);
-
   const [FPS] = useState(1);
+
+  // Canvas related refs
+  const canvas = useRef();
+  const ctx = useRef(null);
 
   // This is for drawing.length === 8. Maybe we need different values for other
   const calculateRenderPerCounter = useCallback((FPS) => {
@@ -55,10 +59,6 @@ const Header = () => {
 
     return () => window.removeEventListener("resize", resize);
   }, []);
-
-  // Canvas related consts
-  const canvas = useRef();
-  const ctx = useRef(null);
 
   const drawing = useMemo(() => {
     return [
@@ -200,7 +200,7 @@ const Header = () => {
     ctx.current.clearRect(0, 0, canvas.current.width, canvas.current.height);
 
     // Define the grid and cell sizes
-    const cellSize = canvas.current.width / (Math.max(drawing.length, drawing[0].length) + 2);
+    const cellSize = Math.round(Math.min(canvas.current.width / (drawing[0].length + 2), canvas.current.height / (drawing.length + 2)));
     const xOffset = Math.max(drawing[0].length - drawing.length, 0) * cellSize / 2;
     const yOffset = Math.max(drawing.length - drawing[0].length, 0) * cellSize / 2;;
     const startX = cellSize + xOffset;
@@ -250,7 +250,7 @@ const Header = () => {
   useEffect(() => {
     // dynamically assign the width and height to canvas.current
     canvas.current.width = Math.min(deviceWidth, 800);
-    canvas.current.height = canvas.current.width;
+    canvas.current.height = Math.min(deviceHeight, 800);
 
     // get context of the canvas.current
     ctx.current = canvas.current.getContext("2d");

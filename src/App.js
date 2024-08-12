@@ -5,7 +5,7 @@ import { ProfileSection } from "./ProfileSection";
 import { DarkModeToggle } from "./DarkMode";
 import { AboutMeSection } from "./AboutMe";
 import { ProjectList } from "./ProjectList";
-import Header from "./Header";
+import Header from "./Header/Header"; // why no {} though
 
 const App = () => {
   return (
