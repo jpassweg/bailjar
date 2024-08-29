@@ -188,3 +188,34 @@ a:hover {
 a:active {
   text-decoration: underline;
 }
+
+.projectList {
+  width: 100%;
+  margin-top: -20px;
+  padding: 0px 20px;
+}
+
+.projectItem {
+  width: 100%;
+  overflow: hidden;
+  cursor: pointer;
+  padding: 10px 20px;
+}
+
+.projectTitle {
+  color: #333;
+}
+
+.projectDescription {
+  overflow: hidden;
+  color: #666;
+}
+
+.scroll-buffer {
+  height: 50vh;
+}
+
+.big-container {
+  padding: 20px 0px;
+  width: 100%;
+}

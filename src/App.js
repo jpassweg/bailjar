@@ -4,18 +4,18 @@ import './Containers.css'
 import { ProfileSection } from "./ProfileSection";
 import { DarkModeToggle } from "./DarkMode";
 import { AboutMeSection } from "./AboutMe";
-import { ProjectList } from "./ProjectList";
-import Header from "./Header";
+import { ProjectList2 } from "./ProjectList2";
+import ScrollBuffer from './ScrollBuffer';
 
 const App = () => {
   return (
     <body>
-      <Header />
       <div class="main-container">
         <DarkModeToggle />
         <ProfileSection />
         <AboutMeSection />
-        <ProjectList />
+        <ProjectList2 />
+        <ScrollBuffer />
       </div>
     </body>
   );

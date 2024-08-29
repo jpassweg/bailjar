@@ -7,12 +7,12 @@ export const AboutMeSection = () => {
     <div class="small-width">
       <div class="container" id="about-me-container">
         <div class="text-container" id="about-me-div">
-          <h2>About me:</h2>
+          <h2>About me</h2>
           <p>
-          I'm a Computer Science graduate with a Master's Degree from ETH Zürich. 
-          My journey began with a fascination for the consciousness created by the human brain and finding similarities to machines. 
-          Today, I am convinced that the human brain is too complex for me to fully understand. 
-          Instead, I focus on understanding people's needs and requirements and transforming those into software solutions.
+          My journey began with a fascination for the consciousness produced by the human brain 
+          and its parallels with machines. Over time, I realized that fully comprehending the brain’s 
+          complexity might be beyond reach. Instead, I’ve shifted my focus to understanding people’s 
+          needs and translating them into effective software solutions.
           </p>
         </div>
         <div class="image-container" id="brain-div">
