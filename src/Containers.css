@@ -35,6 +35,17 @@
   box-sizing: border-box;
 }
 
+.container-large {
+  display: flex;
+  flex-direction: column; /* Default to vertical layout */
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  margin: 0 auto;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
 .right-align {
   display: flex;
   flex-direction: row; /* Default to vertical layout */
@@ -199,7 +210,7 @@ a:active {
   width: 100%;
   overflow: hidden;
   cursor: pointer;
-  padding: 10px 20px;
+  padding: 0px 0px;
 }
 
 .projectTitle {
@@ -207,15 +218,10 @@ a:active {
 }
 
 .projectDescription {
-  overflow: hidden;
+  width: 100%;
   color: #666;
 }
 
 .scroll-buffer {
   height: 50vh;
-}
-
-.big-container {
-  padding: 20px 0px;
-  width: 100%;
 }

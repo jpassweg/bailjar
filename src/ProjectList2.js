@@ -33,8 +33,8 @@ export const ProjectList2 = () => {
   };
 
   return (
-    <div className="big-container">
-      <h2>Projects</h2>
+    <div className="container-large">
+      <div className="text-container"><h2>Projects</h2></div>
       <div className="projectList">
         {projects.map((project) => (
           <div key={project.id} className="projectItem">
